@@ -78,11 +78,9 @@ body {
     border: none;
     margin: .2rem 0;
     text-decoration: none;
-    /* background-color: var(--sideNavbar); */
 }
 .activelist{
     background: #20c997;
-    /* margin: 0 5px; */
     border-radius: 5px;
 }
 .activelist2{
