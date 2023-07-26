@@ -16,8 +16,9 @@ $menuOrganizers = new MenuOrganizer1($conn);
                 function generateMenuHTML($menuItems)
                 {
                         foreach ($menuItems as $menuItem) {
+                                $pid = $menuItem['id'];
                                 ?>
-                                <a class="sub-btn list-group-items second-text fw-bold">
+                                <a class="sub-btn list-group-items second-text fw-bold" onclick="openurl(<?= $pid ?>)">
                                         <i class="<?= $menuItem['navicon'] ?> me-2 sideiconshow"></i>
                                         <span class="text-capitalize">
                                                 <?php echo $menuItem['title'] ?>
@@ -57,6 +58,7 @@ $menuOrganizers = new MenuOrganizer1($conn);
 </script>
 <script>
         $(document).ready(function () {
+                // Tab Toggleing
                 var currentTab = "";
                 $(".sub-btn").click(function () {
                         const subMenu = $(this).next('.sub-menu');
@@ -77,6 +79,7 @@ $menuOrganizers = new MenuOrganizer1($conn);
                         currentTab = isOpen ? null : subMenu; // Update currentTab only if the tab is opened (not closed)
                 });
 
+                // Root Node Active
                 const navLinks = document.querySelectorAll(".sub-btn");
                 navLinks.forEach(function (element) {
                         element.addEventListener('click', function () {
@@ -87,6 +90,7 @@ $menuOrganizers = new MenuOrganizer1($conn);
                         });
                 });
 
+                // Subroot Node Active
                 const navLinks2 = document.querySelectorAll(".subb-btn");
                 navLinks2.forEach(function (element) {
                         element.addEventListener('click', function () {
@@ -98,13 +102,14 @@ $menuOrganizers = new MenuOrganizer1($conn);
                 });
 
         });
+        // page open function
         function openurl(url_id) {
                 $.ajax({
-                        url: '../ajax/abc.php',
+                        url: '../ajax/fetchurl.php',
                         type: 'post',
                         data: { urid: url_id },
                         success: function (data, status) {
-                                str = 'templates/' + data + '.html';
+                                str = '../templates/' + data + '.php';
                                 $("#maincontent").load(str);
                         }
                 });

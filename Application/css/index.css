@@ -84,7 +84,7 @@ body {
     border-radius: 5px;
 }
 .activelist2{
-    background: #0169e8;
+    color: #39d808;
 }
 .caretbtn{
     color:var(--anchorColor);
@@ -105,7 +105,7 @@ body {
 }
 .sub-menu a{
     text-decoration: none;
-    color: var(--anchorColor);
+    /* color: var(--anchorColor); */
 }
 .card-title{
     color:var(--anchorColor);
@@ -179,4 +179,14 @@ td {
 }
 td:hover {
     background-color: var(--backTheme);
+}
+
+/* menu_add */
+.ppp form label,h3{
+    color: var(--anchorColor);
+}
+
+/* Edit Table */
+#menutable tr th{
+    color: var(---anchorColor);
 }
