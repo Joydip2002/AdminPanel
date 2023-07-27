@@ -16,6 +16,9 @@
 }
 .topnavbar {
     background:var(--sideNavbar);
+    position: sticky;
+    z-index: 1;
+    top: 0;
 } 
 .rounded-full {
     border-radius: 100%;
@@ -28,6 +31,7 @@ body {
     color: var(--anchorColor);
 }
 #sidebar-wrapper {
+    position: sticky;
     background:var(--sideNavbar);
     min-height: 100vh;
     margin-left: -15rem;

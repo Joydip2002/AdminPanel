@@ -15,3 +15,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Swal Alert -->
 
+<!-- Datatable Css Link -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+<!-- Datatable Css Link -->

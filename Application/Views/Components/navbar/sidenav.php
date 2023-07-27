@@ -23,13 +23,15 @@ $menuOrganizers = new MenuOrganizer1($conn);
                                         <span class="text-capitalize">
                                                 <?php echo $menuItem['title'] ?>
                                         </span>
-                                        <i class="fa-solid fa-chevron-down caretbtn" id="cb"></i>
+                                        <?php if (!empty($menuItem['child'])) { ?>
+                                                <i class="fa-solid fa-chevron-down caretbtn" id="cb"></i>
+                                        <?php }?>
+                                       
                                 </a>
                                 <?php if (!empty($menuItem['child'])) { ?>
                                         <div class="sub-menu py-1 mx-2" id="dashboard">
                                                 <?php generateChildMenuHTML($menuItem['child']); ?>
                                         </div>
-
                                 <?php }
                         }
                 }

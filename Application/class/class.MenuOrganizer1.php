@@ -21,7 +21,7 @@ class MenuOrganizer1
     private function getChildMenuItems($parentId)
     {
         $data = [];
-        $sql = "SELECT * FROM `menulist` WHERE parentid = $parentId AND status = '1'";
+        $sql = "SELECT * FROM `menulist` WHERE parentid = $parentId AND status = '1' ORDER BY orderlist";
         $result = mysqli_query($this->conn, $sql);
 
         while ($fetchData = mysqli_fetch_assoc($result)) {
