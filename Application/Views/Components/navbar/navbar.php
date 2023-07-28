@@ -13,7 +13,7 @@
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
                           <ul class="navbar-nav mx-auto gap-4 mb-lg-0">
                               <li class="position-relative">
-                                  <input type="search" placeholder="Search for anything..." class="searchbox">
+                                  <input type="search"  placeholder="Search for anything..." class="searchbox">
                                   <i class="fa-solid fa-magnifying-glass searchicon  position-absolute" style="right: 10px; top: 15px;"></i>
                               </li>
                               <li class="nav-item mt-2 position-relative">

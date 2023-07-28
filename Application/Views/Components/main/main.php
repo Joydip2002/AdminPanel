@@ -86,3 +86,12 @@
                       </div>
                 </div>
             </div>
+            
+            <!-- footer -->
+            <!-- <div class="footera p-3">
+                <div class="text-center">
+                    <p>&copy; 2023 All rights reserved.</p>
+                </div>
+            </div> -->
+            <!-- footer -->
+            

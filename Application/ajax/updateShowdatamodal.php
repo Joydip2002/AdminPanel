@@ -4,34 +4,33 @@ include('../config/connection.php');
 // update data
 if (isset($_POST['uid'])) {
     $uuid = $_POST['uid'];
-    $name = $_POST['name'];
+    // $name = $_POST['name'];
     $title = $_POST['title'];
     $parentid = $_POST['parentid'];
     $orderlist = $_POST['orderlist'];
     $status = $_POST['status'];
     $icon = $_POST['icon'];
     $url = $_POST['url'];
-
+    // echo $uuid, $name ,$title, $parentid, $orderlist, $status, $icon, $url;
+    // die;
     $t = time();
     date_default_timezone_set('Asia/Kolkata');
+
     $date = date("Y-m-d h:i:s");
-
-    // Fetch the current listorder values from the database in ascending order
-    $fetchOrderQuery = "SELECT id,orderlist FROM menulist WHERE title = '$title' ORDER BY orderlist ASC";
-    $fetchOrderResult = mysqli_query($conn, $fetchOrderQuery);
-
-    if ($fetchOrderResult) {
-        $sequentialOrder = 1;
-        
-        while ($row = mysqli_fetch_assoc($fetchOrderResult)) {
+    $orderplus = $orderlist+1;
+    $sqlpg = "SELECT * FROM `menulist` WHERE `parentid`='$parentid' AND `orderlist`>='$orderplus'";
+    $respg= mysqli_query($conn,$sqlpg);
+    $numpg = mysqli_num_rows($respg);
+    if($numpg>0){      
+        $sequentialOrder=$orderplus+1;
+        while ($row = mysqli_fetch_assoc($respg)) {
             $menuId = $row['id'];
-            $updateOrderQuery = "UPDATE menulist SET orderlist = $sequentialOrder WHERE parentid = $menuId";
+            $updateOrderQuery = "UPDATE `menulist` SET `orderlist` = $sequentialOrder WHERE `id` = $menuId";
             $updateOrderResult = mysqli_query($conn, $updateOrderQuery);
-            echo $sequentialOrder++;
+            $sequentialOrder++;
         }
     }
-
-    $updateQuery = "UPDATE menulist SET name = '$name', title = '$title', parentid ='$parentid', orderlist = '$orderlist',status='$status', navicon = '$icon',url ='$url',updated_date = '$date' WHERE id = '$uuid'";
+    $updateQuery = "UPDATE `menulist` SET `title` = '$title', `parentid` ='$parentid',`orderlist`='$orderplus',`updated_date`= '$date',`navicon` = '$icon',`url` ='$url' WHERE `id` = '$uuid'";
     $upres = mysqli_query($conn, $updateQuery);
 
     if ($upres) {

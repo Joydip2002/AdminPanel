@@ -10,70 +10,59 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Menu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <h5 class="message text-danger text-center"></h5>
         <form class="container form-group">
           <div class="mb-3">
-            <label for="">Update Name</label>
-            <input type="text" name="uname" id="name" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="">Update Title</label>
+            <label for="">Name</label>
             <input type="text" name="umobile" id="title" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="">Update Parentid</label>
-            <select class="form-select" id="parentid" aria-label="Default select example">
+            <label for="">Parent Node</label>
+            <select class="form-select" id="parentid" aria-label="Default select example" onchange="detectChild(this.value);">
               <?php
-              $sql = "SELECT DISTINCT parentid FROM menulist";
+              $sql = "SELECT DISTINCT id, title, parentid FROM menulist WHERE parentid = 0";
               $res = mysqli_query($conn, $sql);
               while ($showdata = mysqli_fetch_array($res)) {
                 ?>
-                <option value="<?php echo $showdata['parentid']; ?>"><?php echo $showdata['parentid']; ?></option>
+                <option value="<?php echo $showdata['id'];?>"><?php echo $showdata['title']; ?></option>
                 <?php
               }
               ?>
             </select>
           </div>
+          
           <div class="mb-3">
-            <label for="">Update Orderlist</label>
+            <label for="">Place After</label>
             <select class="form-select" id="orderlist" aria-label="Default select example">
-              <option value="1">1</option>
-              <?php
-              $sql = "SELECT DISTINCT orderlist FROM menulist";
-              $res = mysqli_query($conn, $sql);
-              while ($showdata = mysqli_fetch_array($res)) {
-                ?>
-                <option value="<?php echo $showdata['orderlist']; ?>"><?php echo $showdata['orderlist']; ?></option>
-                <?php
-              }
-              ?>
+              
             </select>
           </div>
+
           <div class="mb-3">
-            <label for="">Update Status</label>
+            <label for="">Status</label>
             <select class="form-select" id="status" aria-label="Default select example">
               <?php
               $sql = "SELECT DISTINCT status FROM menulist";
               $res = mysqli_query($conn, $sql);
               while ($showdata = mysqli_fetch_array($res)) {
                 ?>
-                <option value="<?php echo $showdata['status']; ?>"><?php echo $showdata['status']; ?></option>
+                <option value="<?php echo $showdata['status'];?>"><?php echo $showdata['status']; ?></option>
                 <?php
               }
               ?>
-
             </select>
           </div>
+          
           <div class="mb-3">
-            <label for="">Update Icon</label>
+            <label for="">Icon</label>
             <input type="email" name="uemail" id="icon" class="form-control">
           </div>
           <div class="mb-3">
-            <label for="">Update URL</label>
+            <label for="">URL</label>
             <input type="text" name="uemail" id="url" class="form-control">
           </div>
           <input type="hidden" name="" value="" id="mid">
@@ -90,7 +79,6 @@
 
 
 
-<div class="">
   <div class="text-center mt-2">
     <h3>Edit Menu</h3>
   </div>
@@ -101,6 +89,7 @@
     $(document).ready(function () {
       fetchData();
     })
+
     function fetchData() {
       var displaydata = true;
       $.ajax({
@@ -119,7 +108,7 @@
     function updateMenu(id) {
       $.post('../ajax/showdatamodal.php', { updateid: id }, function (data, status) {
         var response = JSON.parse(data);
-        $("#name").val(response.name);
+        // $("#name").val(response.name);
         $("#title").val(response.title);
         $("#parentid").val(response.parentid);
         $("#orderlist").val(response.orderlist);
@@ -127,6 +116,7 @@
         $("#icon").val(response.navicon);
         $("#url").val(response.url);
         $("#mid").val(response.id);
+        detectChild(response.parentid,response.orderlist);
       })
       $("#staticBackdrop").modal('show');
     }
@@ -197,5 +187,18 @@
               }
           }
         })
+    }
+
+    function detectChild(id, olist=-1){
+      $.ajax({
+        url : '../ajax/detectChildByParent.php',
+        type : 'POST',
+        data : {id : id, olist:olist},
+        success :function(data,status){
+          // console.log(data);
+          $("#orderlist").html(data);
+        }
+      })
+
     }
   </script>
