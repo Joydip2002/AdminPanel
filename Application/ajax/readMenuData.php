@@ -1,12 +1,12 @@
 <?php
 include("../config/connection.php");
 if (isset($_POST['displaydata'])) {
-    $table = ' <table class="table table-striped" id = "myTable">
-    <thead>
+    $table = ' <div class="container table-responsive"><table class="table table-striped datatable" id = "myTable">
+    <thead class="bg-secondary">
             <tr id="menutable">
+            <td scope="col">Sl no</td>
             <td scope="col">Name</td>
             <td scope="col">Parent Node</td>
-            <td scope="col">Place After</td>
             <td scope="col">Icon</td>
             <td scope="col">URL</td>
             <td scope="col">Action</td> 
@@ -16,6 +16,19 @@ if (isset($_POST['displaydata'])) {
 
     $updateQuery = "SELECT * FROM menulist";
     $res = mysqli_query($conn, $updateQuery);
+    $number = 1;
+    function getparent($id, $conn){ 
+        $sqlparentname = "SELECT * FROM `menulist` WHERE `id`='$id'";
+        $resparentname = mysqli_query($conn, $sqlparentname);
+        $numparent = mysqli_num_rows($resparentname);
+        if ($numparent > 0)
+        {
+            $fetchparent = mysqli_fetch_array($resparentname);
+            $parentname = $fetchparent['title'];
+                return $parentname;
+        }
+        return "Root";
+    }
     while ($showdata = mysqli_fetch_assoc($res)) {
         $title = $showdata['title'];
         $parentid = $showdata['parentid'];
@@ -28,18 +41,20 @@ if (isset($_POST['displaydata'])) {
                                     <input type="checkbox" data-id="' . $id . '" onclick="toggleStatus(' . $id . ')" ' . ($status == 1 ? 'checked' : '') . '>
                                     <span class="slider round"></span>
                            </label>';
+        $parentValue = getparent($parentid, $conn);
         $table .= '<tr>
+                        <td>' . $number . '</td>
                         <td>' . $title . '</td>
-                        <td>' . $parentid . '</td>
-                        <td>' . $orderlist . '</td>
-                        <td>' . $navicon . '</td>
+                        <td>'.$parentValue.'</td>
+                        <td><i class="' . $navicon . '" id="deletebtn"></i></td>
                         <td>' . $url . '</td>
                         <td class=""><i class="fa-solid fa-pen-to-square text-success" id="editbtn" onclick="updateMenu(' . $id . ')" style="font-size:30px; margin:0 10px;"></i> <i class="fa-solid fa-trash text-danger" id="deletebtn" onclick="deleteMenu(' . $id . ')" style="font-size:30px;"></i>
                         </td>
                         <td>'.$statusCheckbox.'</td>                      
                  </tr>';
+        $number++;
     }
-    $table .= '</table>';
+    $table .= '</table></div>';
     echo $table;
 }
 ?>
@@ -48,8 +63,8 @@ if (isset($_POST['displaydata'])) {
     function toggleStatus(id) {
         const checkbox = document.querySelector(`input[data-id="${id}"]`);
         const status = checkbox.checked ? 1 : 0;
-        alert(`Updated status for ID ${id}: ${status}`);
-        console.log(id,status);
+        // alert(`Updated status for ID ${id}: ${status}`);
+        // console.log(id,status);
         $.ajax({
             url: "../ajax/toggleNavIcon.php",
             type: "POST",

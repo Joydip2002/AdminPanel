@@ -40,7 +40,7 @@ $menuOrganizers = new MenuOrganizer1($conn);
                 {
                         foreach ($childItems as $childItem) {
                                 $id = $childItem['id'];
-                                echo '<div class="mx-5 py-1">';
+                                echo '<div class="py-1" style="margin-left:30px">';
                                 echo '<a href="#" class="subb-btn text-capitalize" onclick="openurl('. $id .')">' . $childItem['title'] . '</a>';
                                 echo '</div>';
                         }

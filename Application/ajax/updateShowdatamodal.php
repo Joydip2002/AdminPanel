@@ -8,7 +8,7 @@ if (isset($_POST['uid'])) {
     $title = $_POST['title'];
     $parentid = $_POST['parentid'];
     $orderlist = $_POST['orderlist'];
-    $status = $_POST['status'];
+    // $status = $_POST['status'];
     $icon = $_POST['icon'];
     $url = $_POST['url'];
     // echo $uuid, $name ,$title, $parentid, $orderlist, $status, $icon, $url;
@@ -21,7 +21,8 @@ if (isset($_POST['uid'])) {
     $sqlpg = "SELECT * FROM `menulist` WHERE `parentid`='$parentid' AND `orderlist`>='$orderplus'";
     $respg= mysqli_query($conn,$sqlpg);
     $numpg = mysqli_num_rows($respg);
-    if($numpg>0){      
+    if($numpg>0)
+    {      
         $sequentialOrder=$orderplus+1;
         while ($row = mysqli_fetch_assoc($respg)) {
             $menuId = $row['id'];

@@ -2,8 +2,7 @@
   <nav class="navbar topnavbar navbar-expand-lg py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left fs-4 me-3" id="menu-toggle"></i>
-                    <i class="fa-solid fa-square-xmark fs-4 me-3" id="Crossbtn" style="visibility: hidden;"></i>
-                     
+                    <i class="fa-solid fa-square-xmark fs-4 me-3" id="Crossbtn" style="visibility: hidden;"></i>    
                 </div>
                       <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
                           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

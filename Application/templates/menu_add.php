@@ -5,11 +5,11 @@
     <div class="d-flex ppp justify-content-center">
         <form class="col-10 border border-primary p-5">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Title</label>
+            <label for="exampleInputEmail1" class="form-label">Name</label>
             <input type="text" id="title" class="form-control" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Parent</label>
+            <label for="exampleInputPassword1" class="form-label">Parent Node</label>
             <select class="form-select" id="parent" aria-label="Default select example">
               <option selected>Open this select menu</option>
               <option value="null">null</option>
@@ -45,7 +45,7 @@
                 var icon = $('#icon').val();
                 var url = $('#url').val();
 
-                console.log(title, parent, icon, url);
+                // console.log(title, parent, icon, url);
 
                 if (title == "" || parent == "" || url == "") {
                     $(".message").html("Please Fill in the Blank")

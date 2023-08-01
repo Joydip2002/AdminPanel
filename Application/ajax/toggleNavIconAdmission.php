@@ -2,14 +2,14 @@
 include("../config/connection.php");
     if(isset($_POST['id'])){
         $id = $_POST['id'];
-        $status = $_POST['status'];
-        $sqlStatus = "UPDATE menulist SET status = '$status' WHERE id = '$id'";
+        $adstatus = $_POST['status'];
+        $sqlStatus = "UPDATE admission SET admission_status = '$adstatus' WHERE id = '$id'";
         $resStatus = mysqli_query($conn,$sqlStatus);
         
         if($resStatus){
             $response = [
                 "status" => 200,
-                "message" => 'Menu Status Updated Successfully.'
+                "message" => 'admission Status Updated Successfully.'
             ];
         }
         else{
