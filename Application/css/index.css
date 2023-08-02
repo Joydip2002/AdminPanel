@@ -353,3 +353,7 @@ table.table thead {
     z-index: 9999;
 
   }
+
+  .choosedep{
+    color: var(--backTheme);
+  }

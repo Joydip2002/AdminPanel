@@ -2,8 +2,10 @@
 include("../config/connection.php");
 if(isset($_POST['id'])){
     $sid = $_POST['id'];
-
-    $query = "UPDATE admission SET status = '1' WHERE id = '$sid'";
+    $t = time();
+    date_default_timezone_set('Asia/Kolkata');
+    $date = date("Y-m-d h:i:s");
+    $query = "UPDATE admission SET status = '1',updated_date = '$date' WHERE id = '$sid'";
     $res = mysqli_query($conn,$query);
 
     if($res){

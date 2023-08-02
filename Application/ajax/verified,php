@@ -8,7 +8,7 @@ include("../config/connection.php");
         if($resStatus){
             $response = [
                 "status" => 200,
-                "message" => 'Menu Status Updated Successfully.'
+                "message" => 'verified Successfully.'
             ];
         }
         else{

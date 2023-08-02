@@ -1,5 +1,6 @@
 <!-- <?php
 session_start();
+include("../config/connection.php");
 ?> -->
 <!doctype html>
 <html lang="en">
@@ -242,6 +243,22 @@ session_start();
               </div>
 
               <div class="col-md-3 mb-3">
+                <label for="" class="form-label">Choose Department</label>
+                    <select class="form-select department" name="department1" id="department" aria-label="Default select example">
+                        <option selected>select menu</option>
+                        <?php
+                        $query = "SELECT * FROM departments";
+                        $res = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            ?>
+                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+              </div>
+
+              <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Address</label>
                 <input type="text" class="form-control Address" name="address1" id="namefield"
                   aria-describedby="emailHelp" placeholder="Enter Your Address" required>
@@ -416,6 +433,22 @@ session_start();
               </div>
 
               <div class="col-md-3 mb-3">
+                <label for="" class="form-label">Choose Department</label>
+                    <select class="form-select department" name="`+ "department" + ids + `" id="department" aria-label="Default select example">
+                        <option selected>select menu</option>
+                        <?php
+                        $query = "SELECT * FROM departments";
+                        $res = mysqli_query($conn, $query);
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            ?>
+                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+              </div>
+
+              <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Address</label>
                 <input type="text" name="`+ "address" + ids + `" class="form-control Address" id="" placeholder="Enter Your Address" required>
               </div>
@@ -504,6 +537,7 @@ session_start();
         trgt.find('.subject').attr('name', 'sb' + i);
         trgt.find('.subjectmarks').attr('name', 'ssm' + i);
         trgt.find('.Season').attr('name', 'season' + i);
+        trgt.find('.department').attr('name', 'department' + i);
         trgt.find('.Address').attr('name', 'address' + i);
 
         // trgt.find('.profile-photo-input').attr('name', 'file' + i);

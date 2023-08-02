@@ -16,11 +16,11 @@ if (isset($_POST['displaydata'])) {
                 <td scope="col">Address</td>  
                 <td scope="col">admission_date</td>  
                 <td scope="col">Action</td>  
-                <td scope="col">Admission_status</td>  
+                <td scope="col">status</td>  
             </tr>
     </thead>';
 
-    $updateQuery = "SELECT * FROM admission";
+    $updateQuery = "SELECT * FROM admission ORDER BY id DESC;";
     $res = mysqli_query($conn, $updateQuery);
     $number = 1;
     while ($showdata = mysqli_fetch_assoc($res)) {
@@ -36,12 +36,26 @@ if (isset($_POST['displaydata'])) {
         $season = $showdata['season'];
         $address = $showdata['address'];
         $status = $showdata['status'];
+        $btn_check = $showdata['btn_check'];
         $admission_date = $showdata['admission_date'];
     
-        $statusCheckbox = '<label class="switch">
-                                    <input type="checkbox" data-id="' . $id . '" onclick="toggleStatus(' . $id . ')" ' . ($adstatus == 1 ? 'checked' : '') . '>
-                                    <span class="slider round"></span>
-                           </label>';
+        $status2 = $showdata['status'];
+                        $disableCheckbox = ($status2 == 1) ? 'disabled' : '';
+                        
+                        if($status2 == 1) {
+                            $statusCheckbox = '<label class="switch">
+                                                <input type="checkbox" data-id="' . $id . '" onclick="getCancelApproved(' . $id . ')" ' . ($adstatus == 1 ? 'checked' : '') . ' ' . $disableCheckbox . '>
+                                                <span class="slider round"></span>
+                                            </label>';
+                           }
+                           
+                           if($status2 == 0) {    
+                                $statusCheckbox = '<label class="switch">
+                                                    <input type="checkbox" data-id="' . $id . '" onclick="toggleStatus(' . $id . ')" ' . ($adstatus == 1 ? 'checked' : '') . '>
+                                                    <span class="slider round"></span>
+                                                </label>';
+                               }    
+
         // $parentValue = getparent($parentid, $conn);
         $table .= '<tr>
                         <td>' . $number . '</td>
@@ -54,59 +68,67 @@ if (isset($_POST['displaydata'])) {
                         <td>' . $ssm . '</td>
                         <td>' . $season . '</td>
                         <td>' . $address . '</td>
-                        <td>' . $admission_date . '</td>
-                        <td>' .$statusCheckbox. '</td>         
+                        <td>' . $admission_date . '</td>        
                         <td>';
 
                         if ($status == 0) {
-                            $table .= '<button class="btn btn-info m-2" onclick="approvedStu(' . $id . ')">Approve</button>';
-                        } else {
-                            $table .= '<button class="btn btn-danger" onclick="unapprovedStu(' . $id . ')">Un-aproved</button>';
+                            if($adstatus == '1'){
+                                $table .= '<button class="btn btn-success m-2"id ="approve" onclick="approvedStu(' . $id . ')">Approve</button>';
+                            }
+                            else{
+                                $table .= '<button class="btn btn-success m-2 disabled" onclick="disableForm(' . $id . ')">Approve</button>';
+                            }
+                           
+                        }else {
+                            if($btn_check == '1'){
+                                $table .= '<button class="btn btn-danger" onclick="alreadyExit(' . $id . ')">Unapprove</button>';
+                            }
+                            else{
+                                $table .= '<button class="btn btn-danger" onclick="unapprovedStu(' . $id . ')">Unapprove</button>';
+                            }
                         }
-                        $table .= '</td></tr>';
-                        $number++;
-                                  
-        $number++;
+                        $table .= '</td>
+                        <td>' .$statusCheckbox. '</td> 
+                    </tr>';
+               $number++;
     }
     $table .= '</table></div>';
     echo $table;
 }
 ?>
-<!-- Add this in your HTML file or in a separate script file -->
-<script>
-    function toggleStatus(id) {
-        const checkbox = document.querySelector(`input[data-id="${id}"]`);
-        const status = checkbox.checked ? 1 : 0;
-        // alert(`Updated status for ID ${id}: ${status}`);
-        // console.log(id,status);
-        $.ajax({
-            url: "../ajax/toggleNavIconAdmission.php",
-            type: "POST",
-            data : {id : id , status : status},
-            success : function(data,status){
-                console.log("Data:", data);
-                // if (response.status == 200) {
-                //     Swal.fire({
-                //         position: 'middle-center',
-                //         icon: 'success',
-                //         title: response.message,
-                //         showConfirmButton: false,
-                //         timerProgressBar: true,
-                //         timer: 3000
-                //     })
-                // }
-                // else {
-                //     Swal.fire({
-                //         position: 'middle-center',
-                //         icon: 'error',
-                //         title: response.message,
-                //         showConfirmButton: false,
-                //         timerProgressBar: true,
-                //         timer: 3000
-                //     })
-                // }
-            }
-        })
+
+
+<!-- separate script file -->
+<script> 
+    function alreadyExit(id){
+      Swal.fire({
+            position : 'middle-center',
+            icon:'warning',
+            title : 'student already verified',
+            showConfirmButton :false,
+            timerProgressBar: true,
+            timer: 3000
+      })
+    }
+    function getCancelApproved(id){
+      Swal.fire({
+            position : 'middle-center',
+            icon:'warning',
+            title : 'please unapproved and try again!!',
+            showConfirmButton :false,
+            timerProgressBar: true,
+            timer: 3000
+      })
+    }
+    function disableForm(id){
+      Swal.fire({
+            position : 'middle-center',
+            icon:'warning',
+            title : 'Invalid Form Details!!',
+            showConfirmButton :false,
+            timerProgressBar: true,
+            timer: 3000
+      })
     }
 
 </script>

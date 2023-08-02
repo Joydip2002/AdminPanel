@@ -1,7 +1,10 @@
 <?php
 include("../config/connection.php");
-if (isset($_POST['displaydata'])) {
-    $table = '<div class="container table-responsive"><table class="table table-striped datatable" id="myTable">
+if (isset($_POST['dept_name'])) {
+    $dept_name = $_POST['dept_name'];
+    $season = $_POST['season'];
+
+    $table = '<div class="table-responsive"><table class="table table-striped datatable" id="myTable">
     <thead class="bg-secondary">
             <tr id="menutable">
                 <td scope="col">Sl_No</td>
@@ -14,12 +17,25 @@ if (isset($_POST['displaydata'])) {
                 <td scope="col">Specilized_Subject_Total_Marks_XII</td>
                 <td scope="col">Season</td>
                 <td scope="col">Address</td>
-                <td scope="col">Action</td>
+                <td scope="col">Department</td>
+                
             </tr>
     </thead>';
 
-    $updateQuery = "SELECT * FROM admission  WHERE status = '1' ORDER BY updated_date DESC";
-    $res = mysqli_query($conn, $updateQuery);
+    function getDepartment($dept_id, $conn) {
+        $sqlparentname = "SELECT * FROM `departments` WHERE `id`='$dept_id'";
+        $resparentname = mysqli_query($conn, $sqlparentname);
+        $numparent = mysqli_num_rows($resparentname);
+        if ($numparent > 0) {
+            $fetchparent = mysqli_fetch_array($resparentname);
+            $depname = $fetchparent['name'];      
+            return $depname;      
+        }
+        return " ";
+    }
+
+    $query = "SELECT * FROM admission WHERE department_id = '$dept_name' and season = '$season' ORDER BY specilized_subject_total_marks_xii DESC";
+    $res = mysqli_query($conn,$query);
     $number = 1;
     while ($showdata = mysqli_fetch_assoc($res)) {
         $id = $showdata['id'];
@@ -33,10 +49,8 @@ if (isset($_POST['displaydata'])) {
         $season = $showdata['season'];
         $address = $showdata['address'];
         $status = $showdata['status'];
-        $btn_check = $showdata['btn_check'];
-    
-
-       
+        $dept_id = $showdata['department_id'];
+        $dept_name = getDepartment($dept_id, $conn);
 
         $table .= '<tr>
             <td>' . $number . '</td>
@@ -49,14 +63,8 @@ if (isset($_POST['displaydata'])) {
             <td>' . $ssm . '</td>
             <td>' . $season . '</td>
             <td>' . $address . '</td>
-            <td>';
-
-        if ($btn_check == "0") {
-            $table .= '<button class="btn btn-success m-2" onclick="getVerify(' . $id . ')">Verify</button>';
-        } else{
-            $table .= '<button class="btn btn-danger" onclick="getPending(' . $id . ')">Unverify</button>';
-        } 
-        $table .= '</td></tr>';
+            <td>' . $dept_name . '</td>';
+          
         $number++;
     }
     $table .= '</table></div>';
@@ -65,3 +73,5 @@ if (isset($_POST['displaydata'])) {
 
 ?>
 
+
+    

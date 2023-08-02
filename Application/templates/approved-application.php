@@ -1,4 +1,7 @@
-<div class="container text-center"><h3>Approved Application</h3></div>
+<div class="preloader pl" id="preloader">
+    Loading...
+</div>
+<div class="container"><h3>Approved Application</h3></div>
 <div class="showtable col-12"></div>
 
 <script>
@@ -19,23 +22,27 @@
   }
 
 function getVerify(id) {
+    showPreloader();
 // Show the confirmation dialog
     $.ajax({
         url:'../ajax/get-verify.php',
         type : 'POST',
         data : {id : id},
         success :function(data,status){
+          hidePreloader();
           approvedfetchData();
             var response = JSON.parse(data);
         }
     })
 }
     function getApproved(id) {
+        showPreloader();
         $.ajax({
             url:'../ajax/get-approve.php',
             type : 'POST',
             data : {id : id},
             success :function(data,status){
+                hidePreloader();
                 var response = JSON.parse(data);
             }
         })
@@ -43,14 +50,25 @@ function getVerify(id) {
 
     function getPending(id) {
     // Show the confirmation dialog
+        showPreloader();
         $.ajax({
             url:'../ajax/get-pending.php',
             type : 'POST',
             data : {id : id},
             success :function(data,status){
               approvedfetchData();
+              hidePreloader();
                 var response = JSON.parse(data);
             }
         })
     }
+
+    $("#preloader").hide();
+      function showPreloader() {
+        $("#preloader").show();
+      }
+      // Function to hide preloader
+      function hidePreloader() {
+        $("#preloader").hide();
+      }
 </script>

@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $marks12 = $_POST['XII' . $val];
             $sb = $_POST['sb' . $val];
             $ssm = $_POST['ssm' . $val];            
-            $season = $_POST['season' . $val];       
+            $season = $_POST['season' . $val];  
+            $department = $_POST['department' .$val];    
             $address = $_POST['address' . $val]; 
 
             $t = time();
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'season' => $_POST['season' . $val],       
                 'address' => $_POST['address' . $val],       
             );
-        $insertQuery = "INSERT INTO admission (name,title,email,mobile,xii_marks,specilized_subject,specilized_subject_total_marks_xii,season,address,status,admission_status,admission_date) VALUES ('$name','$title','$email','$phone','$marks12','$sb','$ssm','$season','$address','0','1','$date')";
+        $insertQuery = "INSERT INTO admission (name,title,email,mobile,xii_marks,specilized_subject,specilized_subject_total_marks_xii,season,department_id,address,status,admission_status,admission_date) VALUES ('$name','$title','$email','$phone','$marks12','$sb','$ssm','$season','$department','$address','0','1','$date')";
         $res = mysqli_query($conn, $insertQuery);
         $data[] = $person;
     }

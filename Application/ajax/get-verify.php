@@ -11,7 +11,7 @@ if(isset($_POST['id']))
       {
         $appresponse = [
             "status" => 200,
-            "message" => "Approved successfully",
+            "message" => "verify successfully",
             "data"=>[]
         ];  
    }
