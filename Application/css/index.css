@@ -357,3 +357,8 @@ table.table thead {
   .choosedep{
     color: var(--backTheme);
   }
+
+input[type=checkbox][disabled] + .slider {
+    /* color: #ccc; */
+    cursor: auto;
+}

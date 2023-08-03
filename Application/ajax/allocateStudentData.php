@@ -9,16 +9,12 @@ if (isset($_POST['displaydata'])) {
                 <td scope="col">Title</td>
                 <td scope="col">Email</td>
                 <td scope="col">Mobile</td>
-                <td scope="col">XII_Marks</td>
-                <td scope="col">Specilized_Subject</td>
-                <td scope="col">Specilized_Subject_Total_Marks_XII</td>
                 <td scope="col">Season</td>
-                <td scope="col">Address</td>
                 <td scope="col">Action</td>
             </tr>
     </thead>';
 
-    $updateQuery = "SELECT * FROM admission  WHERE status = 'sa' ORDER BY updated_date DESC";
+    $updateQuery = "SELECT * FROM admission  WHERE verified_status = 'allocate' ORDER BY updated_date DESC";
     $res = mysqli_query($conn, $updateQuery);
     $number = 1;
     while ($showdata = mysqli_fetch_assoc($res)) {
@@ -34,8 +30,9 @@ if (isset($_POST['displaydata'])) {
         $address = $showdata['address'];
         $status = $showdata['status'];
         $btn_check = $showdata['btn_check'];
-        $verifiedStatus = $showdata['verified_status'];
     
+
+       
 
         $table .= '<tr>
             <td>' . $number . '</td>
@@ -43,17 +40,10 @@ if (isset($_POST['displaydata'])) {
             <td>' . $title . '</td>
             <td>' . $email . '</td>
             <td>' . $mobile . '</td>
-            <td>' . $xii_marks . '</td>
-            <td>' . $sb . '</td>
-            <td>' . $ssm . '</td>
             <td>' . $season . '</td>
-            <td>' . $address . '</td>
             <td>';
-            if ($verifiedStatus == 'allocate') {
-                    $table .= '<button class="btn btn-danger m-2" onclick="studentDeAllocate(' . $id . ')">Deallocate</button>';
-            }else {
-                $table .= '<button class="btn btn-success m-2" onclick="studentAllocate(' . $id . ')">Allocate</button>';
-            }
+
+            $table .= '<button class="btn btn-success m-2" onclick="editStudent(' . $id . ')">Edit</button>';
         $table .= '</td></tr>';
         $number++;
     }

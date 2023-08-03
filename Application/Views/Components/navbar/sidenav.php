@@ -48,7 +48,7 @@ $menuOrganizers = new MenuOrganizer1($conn);
                 generateMenuHTML($menuData);
                 ?>
 
-                <a href="#" class="list-group-items second-text fw-bold"><i
+                <a href="../Views/logout.php" class="list-group-items second-text fw-bold"><i
                                 class="fas fa-power-off me-2 sideiconshow"></i>Logout</a>
         </div>
 </div>

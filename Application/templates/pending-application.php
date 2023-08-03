@@ -24,6 +24,7 @@
 
 // toggel button in readadmissiondata page
   function toggleStatus(id) {
+        $("#accept").prop("disabled", true);
         const checkbox = document.querySelector(`input[data-id="${id}"]`);
         const status = checkbox.checked ? 1 : 0;
         // alert(`Updated status for ID ${id}: ${status}`);

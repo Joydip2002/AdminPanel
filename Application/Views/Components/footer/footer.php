@@ -7,7 +7,7 @@
 <script src="../js/indexscript.js"></script>
 <!-- Bootstrap Js link -->
 
-<!-- Datatable Js Link -->\
+<!-- Datatable Js Link -->
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
 <!-- Datatable Link -->
 

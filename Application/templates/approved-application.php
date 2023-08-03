@@ -21,11 +21,11 @@
     })
   }
 
-function getVerify(id) {
+  function studentAllocate(id) {
     showPreloader();
 // Show the confirmation dialog
     $.ajax({
-        url:'../ajax/get-verify.php',
+        url:'../ajax/getAllocate.php',
         type : 'POST',
         data : {id : id},
         success :function(data,status){
@@ -35,33 +35,49 @@ function getVerify(id) {
         }
     })
 }
-    function getApproved(id) {
-        showPreloader();
-        $.ajax({
-            url:'../ajax/get-approve.php',
-            type : 'POST',
-            data : {id : id},
-            success :function(data,status){
-                hidePreloader();
-                var response = JSON.parse(data);
-            }
-        })
-    }
 
-    function getPending(id) {
-    // Show the confirmation dialog
-        showPreloader();
-        $.ajax({
-            url:'../ajax/get-pending.php',
-            type : 'POST',
-            data : {id : id},
-            success :function(data,status){
-              approvedfetchData();
-              hidePreloader();
-                var response = JSON.parse(data);
-            }
-        })
-    }
+function studentDeAllocate(id) {
+    showPreloader();
+// Show the confirmation dialog
+    $.ajax({
+        url:'../ajax/studentDeAllocate.php',
+        type : 'POST',
+        data : {id : id},
+        success :function(data,status){
+          hidePreloader();
+          approvedfetchData();
+            var response = JSON.parse(data);
+        }
+    })
+}
+
+    // function getApproved(id) {
+    //     showPreloader();
+    //     $.ajax({
+    //         url:'../ajax/get-approve.php',
+    //         type : 'POST',
+    //         data : {id : id},
+    //         success :function(data,status){
+    //             hidePreloader();
+    //             var response = JSON.parse(data);
+    //         }
+    //     })
+    // }
+
+    // function getPending(id) {
+    // // Show the confirmation dialog
+    //     showPreloader();
+    //     $.ajax({
+    //         url:'../ajax/get-pending.php',
+    //         type : 'POST',
+    //         data : {id : id},
+    //         success :function(data,status){
+    //           approvedfetchData();
+    //           hidePreloader();
+    //             var response = JSON.parse(data);
+    //         }
+    //     })
+    // }
 
     $("#preloader").hide();
       function showPreloader() {

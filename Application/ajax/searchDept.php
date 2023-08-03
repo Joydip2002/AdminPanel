@@ -18,6 +18,7 @@ if (isset($_POST['dept_name'])) {
                 <td scope="col">Season</td>
                 <td scope="col">Address</td>
                 <td scope="col">Department</td>
+                <td scope="col">Action</td>
                 
             </tr>
     </thead>';
@@ -34,7 +35,7 @@ if (isset($_POST['dept_name'])) {
         return " ";
     }
 
-    $query = "SELECT * FROM admission WHERE department_id = '$dept_name' and season = '$season' ORDER BY specilized_subject_total_marks_xii DESC";
+    $query = "SELECT * FROM admission WHERE department_id = '$dept_name' and season = '$season' and status ='s' ORDER BY specilized_subject_total_marks_xii DESC";
     $res = mysqli_query($conn,$query);
     $number = 1;
     while ($showdata = mysqli_fetch_assoc($res)) {
@@ -63,7 +64,8 @@ if (isset($_POST['dept_name'])) {
             <td>' . $ssm . '</td>
             <td>' . $season . '</td>
             <td>' . $address . '</td>
-            <td>' . $dept_name . '</td>';
+            <td>' . $dept_name . '</td>
+            <td><button class="btn btn-info" onclick="selectedStudent('.$id.')">Select</button></td>';
           
         $number++;
     }
@@ -72,6 +74,5 @@ if (isset($_POST['dept_name'])) {
 }
 
 ?>
-
 
     

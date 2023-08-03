@@ -245,7 +245,7 @@ include("../config/connection.php");
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Choose Department</label>
                     <select class="form-select department" name="department1" id="department" aria-label="Default select example">
-                        <option selected>select menu</option>
+                        <option selected>Select Department</option>
                         <?php
                         $query = "SELECT * FROM departments";
                         $res = mysqli_query($conn, $query);
@@ -435,7 +435,7 @@ include("../config/connection.php");
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Choose Department</label>
                     <select class="form-select department" name="`+ "department" + ids + `" id="department" aria-label="Default select example">
-                        <option selected>select menu</option>
+                        <option selected>Select Department</option>
                         <?php
                         $query = "SELECT * FROM departments";
                         $res = mysqli_query($conn, $query);
