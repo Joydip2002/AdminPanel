@@ -220,20 +220,20 @@ include("../config/connection.php");
 
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Class XII Marks</label>
-                <input type="number" class="form-control marks" name="XII1" id="namefield"
-                  aria-describedby="emailHelp" placeholder="Total XII Marks" required>
+                <input type="number" class="form-control marks" name="XII1" id="marks" aria-describedby="emailHelp"
+                  placeholder="Total XII Marks" min="0" max="500" required>
               </div>
 
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Specialized Subject</label>
-                <input type="text" class="form-control subject" name="sb1" id="namefield"
-                  aria-describedby="emailHelp" placeholder="Specialized Subject" required>
+                <input type="text" class="form-control subject" name="sb1" id="namefield" aria-describedby="emailHelp"
+                  placeholder="Specialized Subject" required>
               </div>
 
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Specialized Subject Marks in XII</label>
                 <input type="number" class="form-control subjectmarks" name="ssm1" id="namefield"
-                  aria-describedby="emailHelp" placeholder="Total Marks" required>
+                  aria-describedby="emailHelp" placeholder="Total Marks" min="0" max="100" required>
               </div>
 
               <div class="col-md-3 mb-3">
@@ -244,18 +244,19 @@ include("../config/connection.php");
 
               <div class="col-md-3 mb-3">
                 <label for="" class="form-label">Choose Department</label>
-                    <select class="form-select department" name="department1" id="department" aria-label="Default select example">
-                        <option selected>Select Department</option>
-                        <?php
-                        $query = "SELECT * FROM departments";
-                        $res = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            ?>
-                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                            <?php
-                        }
-                        ?>
-                    </select>
+                <select class="form-select department" name="department1" id="department"
+                  aria-label="Default select example">
+                  <option selected>Select Department</option>
+                  <?php
+                  $query = "SELECT * FROM departments";
+                  $res = mysqli_query($conn, $query);
+                  while ($row = mysqli_fetch_assoc($res)) {
+                    ?>
+                    <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                    <?php
+                  }
+                  ?>
+                </select>
               </div>
 
               <div class="col-md-3 mb-3">
@@ -340,46 +341,46 @@ include("../config/connection.php");
       // if (hash != "") {
       //   $(hash).trigger("click");
       // }
-    //   if(hash == "#nav-list-tab"){
-    //     $(hash).trigger("click");
-    //     showPreloader();
-    //     $.ajax({
-    //       url: 'datatable.php',
-    //       type: 'post',
-    //       success: function (response) {
-    //         $('.listdata').html(response);
-    //         $('#myTable2').DataTable();
-    //         $('.listdata').show();
-    //         hidePreloader();
-    //         $(".chart").hide();
-    //         $('.formdiv1').hide();
-            
-    //       }
-    //     })
-    //   }
-    //   else if(hash == "#nav-chart-tab"){
-    //     $(hash).trigger("click");
-    //     $.ajax({
-    //       url: './chartJs/chartJs.php',
-    //       type: 'post',
-    //       success: function (response) {
-    //         $(".chart").html(response);
-    //         $(".chart").show();
-    //         $('.listdata').hide();
-    //         $('.formdiv1').hide();
-        
-    //       }
-    //     })
-    //   }
-      
+      //   if(hash == "#nav-list-tab"){
+      //     $(hash).trigger("click");
+      //     showPreloader();
+      //     $.ajax({
+      //       url: 'datatable.php',
+      //       type: 'post',
+      //       success: function (response) {
+      //         $('.listdata').html(response);
+      //         $('#myTable2').DataTable();
+      //         $('.listdata').show();
+      //         hidePreloader();
+      //         $(".chart").hide();
+      //         $('.formdiv1').hide();
+
+      //       }
+      //     })
+      //   }
+      //   else if(hash == "#nav-chart-tab"){
+      //     $(hash).trigger("click");
+      //     $.ajax({
+      //       url: './chartJs/chartJs.php',
+      //       type: 'post',
+      //       success: function (response) {
+      //         $(".chart").html(response);
+      //         $(".chart").show();
+      //         $('.listdata').hide();
+      //         $('.formdiv1').hide();
+
+      //       }
+      //     })
+      //   }
+
       $("#preloader").hide();
       function showPreloader() {
         $("#preloader").show();
       }
       // Function to hide preloader
-    //   function hidePreloader() {
-    //     $("#preloader").hide();
-    //   }
+      //   function hidePreloader() {
+      //     $("#preloader").hide();
+      //   }
       var isVisible = true;
       var ids = 2;
       $(document).on('click', '.pbtn', async function (e) {
@@ -440,9 +441,9 @@ include("../config/connection.php");
                         $query = "SELECT * FROM departments";
                         $res = mysqli_query($conn, $query);
                         while ($row = mysqli_fetch_assoc($res)) {
-                            ?>
-                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                            <?php
+                          ?>
+                              <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                              <?php
                         }
                         ?>
                     </select>
@@ -472,46 +473,46 @@ include("../config/connection.php");
         await updateDivIds();
       });
 
-    //   // '#nav-form-tab'
-    //   $(document).on('click', '#nav-form-tab', function (e) {
-    //     $('.formdiv1').show();
-    //     $('.listdata').hide();
-    //     $(".chart").hide();
-    //     insertUrlHash("#nav-form-tab");
-    //   })
+      //   // '#nav-form-tab'
+      //   $(document).on('click', '#nav-form-tab', function (e) {
+      //     $('.formdiv1').show();
+      //     $('.listdata').hide();
+      //     $(".chart").hide();
+      //     insertUrlHash("#nav-form-tab");
+      //   })
       // #nav-list-tab
-    //     $(document).on('click', '#nav-list-tab', function (e) {
-    //     e.preventDefault();
-    //     showPreloader();
-    //     $.ajax({
-    //       url: 'datatable.php',
-    //       type: 'post',
-    //       success: function (response) {
-    //         $('.listdata').html(response);
-    //         $('#myTable2').DataTable();
-    //         $('.listdata').show();
-    //         hidePreloader();
-    //         $(".chart").hide();
-    //         $('.formdiv1').hide();
-    //         insertUrlHash("#nav-list-tab");
-    //       }
-    //     })
-    //   })
+      //     $(document).on('click', '#nav-list-tab', function (e) {
+      //     e.preventDefault();
+      //     showPreloader();
+      //     $.ajax({
+      //       url: 'datatable.php',
+      //       type: 'post',
+      //       success: function (response) {
+      //         $('.listdata').html(response);
+      //         $('#myTable2').DataTable();
+      //         $('.listdata').show();
+      //         hidePreloader();
+      //         $(".chart").hide();
+      //         $('.formdiv1').hide();
+      //         insertUrlHash("#nav-list-tab");
+      //       }
+      //     })
+      //   })
       // #nav-chart-tab
-    //   $(document).on("click", "#nav-chart-tab", function (e) {
-    //     e.preventDefault();
-    //     $.ajax({
-    //       url: './chartJs/chartJs.php',
-    //       type: 'post',
-    //       success: function (response) {
-    //         $(".chart").html(response);
-    //         $(".chart").show();
-    //         $('.listdata').hide();
-    //         $('.formdiv1').hide();
-    //         insertUrlHash("#nav-chart-tab");
-    //       }
-    //     })
-    //   })
+      //   $(document).on("click", "#nav-chart-tab", function (e) {
+      //     e.preventDefault();
+      //     $.ajax({
+      //       url: './chartJs/chartJs.php',
+      //       type: 'post',
+      //       success: function (response) {
+      //         $(".chart").html(response);
+      //         $(".chart").show();
+      //         $('.listdata').hide();
+      //         $('.formdiv1').hide();
+      //         insertUrlHash("#nav-chart-tab");
+      //       }
+      //     })
+      //   })
       // End nav Toggal
 
       // Remove Field
@@ -652,6 +653,16 @@ include("../config/connection.php");
     //   $('.selected-image').remove();
     //   croppers = {};
     // });
+
+    document.getElementById('subform').addEventListener('submit', function (event) {
+      var marksInput = parseInt(document.getElementById('marks').value);
+
+      if (isNaN(marksInput) || marksInput > 500) {
+        event.preventDefault();
+        alert('Marks must be a number between 0 and 500.');
+      }
+    });
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

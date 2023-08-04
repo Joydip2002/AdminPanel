@@ -1,7 +1,5 @@
 <?php
 include("../config/connection.php");
-  $query2 = "SELECT * FROM students;";
-  $res2 = mysqli_query($conn,$query2);
 ?>
 
 <div>
@@ -48,18 +46,7 @@ include("../config/connection.php");
                 </tr>
               </thead>
               <tbody>
-                <?php
-                 while($data = mysqli_fetch_array($res2)){
-                    ?>
-                      <tr>
-                        <td><?php echo $data['name']?></td>
-                        <td><?php echo $data['roll']?></td>
-                        <td><?php echo $data['season']?></td>
-                        <td><?php echo $data['name']?></td>
-                      </tr>
-                    <?php
-                 }
-                ?>
+        
               </tbody>
             </table>
             <!-- End Table -->

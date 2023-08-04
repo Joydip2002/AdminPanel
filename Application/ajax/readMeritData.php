@@ -4,17 +4,13 @@ if (isset($_POST['displaydata'])) {
     $table = '<div class="container table-responsive p-3"><table class="table table-striped datatable" id = "myTable">
     <thead class="bg-secondary">
             <tr id="menutable">
-                <td scope="col">Sl_No</td>
+                <td scope="col">Sl.No.</td>
                 <td scope="col">Name</td>
                 <td scope="col">Title</td>
                 <td scope="col">Email</td>
-                <td scope="col">Mobile</td>
-                <td scope="col">XII_Marks</td> 
-                <td scope="col">Specilized_Subject</td> 
-                <td scope="col">Specilized_Subject_Total_Marks_XII</td> 
-                <td scope="col">Season</td> 
-                <td scope="col">Address</td>  
-                <td scope="col">admission_date</td>  
+                <td scope="col">Phone</td>
+                <td scope="col">HSMarks</td> 
+                <td scope="col">AppliedSubject</td>                 
                 <td scope="col">Action</td>   
             </tr>
     </thead>';
@@ -72,11 +68,7 @@ if (isset($_POST['displaydata'])) {
                         <td>' . $email . '</td>
                         <td>' . $mobile . '</td>
                         <td>' . $xii_marks . '</td>
-                        <td>' . $sb . '</td>
-                        <td>' . $ssm . '</td>
-                        <td>' . $season . '</td>
-                        <td>' . $address . '</td>
-                        <td>' . $admission_date . '</td>        
+                        <td>' . $sb . '</td>     
                         <td>';
 
                         if ($status == 'ss') {
@@ -84,7 +76,7 @@ if (isset($_POST['displaydata'])) {
                            
                         }else {
                             if($verifiedStatus == 'a'){
-                                $table .= '<button class="btn btn-danger m-2" onclick="rejectStuMerit(' . $id . ')">Reject</button>';
+                                $table .= '<button class="btn btn-danger m-2" onclick="rejectStuMerit(' . $id . ')">UnApprove</button>';
                             }
                             else{
                                 $table .= '<button class="btn btn-success m-2"id ="approve" onclick="approvedStuMerit(' . $id . ')">Approve</button>';

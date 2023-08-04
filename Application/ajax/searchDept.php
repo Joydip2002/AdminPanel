@@ -12,11 +12,9 @@ if (isset($_POST['dept_name'])) {
                 <td scope="col">Title</td>
                 <td scope="col">Email</td>
                 <td scope="col">Mobile</td>
-                <td scope="col">XII_Marks</td>
-                <td scope="col">Specilized_Subject</td>
-                <td scope="col">Specilized_Subject_Total_Marks_XII</td>
-                <td scope="col">Season</td>
-                <td scope="col">Address</td>
+                <td scope="col">HSMarks</td>
+                <td scope="col">AppliedSubject</td>
+                <td scope="col">MarksInAppliedSubject</td>
                 <td scope="col">Department</td>
                 <td scope="col">Action</td>
                 
@@ -35,7 +33,7 @@ if (isset($_POST['dept_name'])) {
         return " ";
     }
 
-    $query = "SELECT * FROM admission WHERE department_id = '$dept_name' and season = '$season' and status ='s' ORDER BY specilized_subject_total_marks_xii DESC";
+    $query = "SELECT * FROM admission WHERE department_id = '$dept_name' and season = '$season' and status ='s' ORDER BY (specilized_subject_total_marks_xii+xii_marks) DESC";
     $res = mysqli_query($conn,$query);
     $number = 1;
     while ($showdata = mysqli_fetch_assoc($res)) {
@@ -52,6 +50,7 @@ if (isset($_POST['dept_name'])) {
         $status = $showdata['status'];
         $dept_id = $showdata['department_id'];
         $dept_name = getDepartment($dept_id, $conn);
+        $addMarks = $xii_marks + $ssm;
 
         $table .= '<tr>
             <td>' . $number . '</td>
@@ -62,8 +61,6 @@ if (isset($_POST['dept_name'])) {
             <td>' . $xii_marks . '</td>
             <td>' . $sb . '</td>
             <td>' . $ssm . '</td>
-            <td>' . $season . '</td>
-            <td>' . $address . '</td>
             <td>' . $dept_name . '</td>
             <td><button class="btn btn-info" onclick="selectedStudent('.$id.')">Select</button></td>';
           

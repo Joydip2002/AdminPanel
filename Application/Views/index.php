@@ -43,9 +43,9 @@
     <div class="container col-md-7" id="p">
         <div class="container col-md-5 bg-light rounded-3" id="c">
             <div class="container col-md-12">
-                <h2 class="text-center py-3">Sign in</h2>
+                <h2 class="text-center py-3 mt-3">Sign in</h2>
             </div>  
-            <div class="container col-md-12 text-center py-4">
+            <div class="container col-md-12 text-center py-3">
                 <h4>Welcome</h4>
                 <p>Enter Your Register Username</p>
                 <?php
